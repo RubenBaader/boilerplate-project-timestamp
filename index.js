@@ -27,7 +27,6 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api", (req, res) => {
   let timeStamp = new Date();
-  // console.log(timeStamp)
 
   // Format:
   // Thu, 01 Jan 1970 00:00:00 GMT
@@ -39,9 +38,10 @@ app.get("/api", (req, res) => {
 app.get("/api/:date", function (req, res) {
   console.log("-----------------------------", req.params.date)
   let timeStamp = new Date(req.params.date);
+  // if input is a number given as a string, attempt to cast
   if (timeStamp.toString() === "Invalid Date")
     timeStamp = new Date(Number(req.params.date));
-
+  // If casting fails, return error
   if (timeStamp.toString() === "Invalid Date") 
   {
     res.json({ error : "Invalid Date"})
